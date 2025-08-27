@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,5 +9,291 @@
     <div id="root"></div>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="./src/index.js"></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venkata Siva Kumar Mariyala | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        .animate-fade-in-delay-1 {
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+            opacity: 0;
+        }
+        .animate-fade-in-delay-2 {
+            animation: fadeIn 1s ease-in-out 1s forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full top-0 z-10 bg-gray-800 bg-opacity-90 backdrop-blur-sm shadow-md py-4">
+        <div class="container mx-auto px-4 md:px-8 max-w-7xl flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white">Venkata Siva Kumar Mariyala</a>
+            <div class="flex gap-6 md:gap-8 lg:gap-10">
+                <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-white transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-white transition-colors duration-300">Projects</a>
+                <button id="contact-button" class="text-white hover:text-gray-300 transition-colors duration-300">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
+            <div class="text-center p-4 md:p-8 z-10">
+                <!-- Profile image will be injected here -->
+                <div id="profile-image-container" class="mb-8"></div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 animate-fade-in">
+                    Hello, I'm <span class="text-blue-400">Venkata Siva Kumar Mariyala</span>.
+                </h1>
+                <p class="text-xl md:text-2xl font-light mb-8 animate-fade-in-delay-1">
+                    A passionate Software Developer & App Developer.
+                </p>
+                <button id="hero-contact-button" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 animate-fade-in-delay-2">
+                    Get In Touch
+                </button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 md:px-8 max-w-7xl">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 text-gray-800">About Me</h2>
+                <div class="text-center text-lg max-w-3xl mx-auto text-gray-600">
+                    <p class="mb-4">
+                        I'm Mariyala Venkata Siva Kumar, a passionate Computer Science and Engineering undergraduate 
+                        at SASTRA Deemed University with a strong foundation in problem-solving, software development, 
+                        and Data structures & algorithms.
+                        I enjoy building efficient solutions and developing applications that make a real impact.
+                        With strong communication, time management, and analytical skills, I am constantly exploring new technologies and refining my expertise. 
+                    </p>
+                    <p>
+                        I am particularly interested in software development, full-stack applications, and innovative problem-solving. 
+                        I aspire to contribute to impactful projects through internships and real-world applications. Beyond academics, 
+                        I thrive in collaborative environments where I can learn, grow, and apply my knowledge to solve meaningful challenges.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-4 md:px-8 max-w-7xl">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 text-gray-800">My Skills</h2>
+                <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Skills will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 md:px-8 max-w-7xl">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 text-gray-800">My Projects</h2>
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Projects will be injected here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-6 text-center">
+        <div class="container mx-auto px-4 md:px-8 max-w-7xl">
+            <p>&copy; 2024 All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-gray-900 bg-opacity-75 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative transform transition-all duration-300 scale-100 opacity-100">
+            <button id="close-modal-button" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Let's Connect!</h3>
+                <p class="text-gray-600 mb-6">
+                    I'm always open to new opportunities. Feel free to reach out.
+                </p>
+                <div id="socials-container" class="flex flex-col gap-4">
+                    <!-- Social links will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const projects = [
+                {
+                    title: 'Ecommerce Application',
+                    description: 'A full-featured Ecommerce web application that allows users to browse products, add items to the cart, manage addresses, and securely place orders. Built with React for the frontend and Node.js + Express for the backend, the app integrates with MongoDB for database management and features responsive design with Tailwind CSS. It also includes authentication, order tracking, and a seamless checkout experience.',
+                    skills: ['React', 'React Native', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
+                    liveUrl: 'https://sgstorebadvel.onrender.com',
+                    githubUrl: 'https://github.com/Venkata-Siva-Kumar/finalsrc.git',
+                },
+                {
+                    title: 'Gemini Ice Cream App',
+                    description: 'A mobile application for an ice cream shop that enables customers to browse flavors, customize orders, and place them seamlessly. Built with React Native for a smooth cross-platform experience and integrated with a backend API for real-time order management. The app features user authentication, cart management, and an intuitive UI for easy navigation.',
+                    skills: ['React Native', 'Node.js', 'Express', 'MySQL', 'Tailwind CSS'],
+                    liveUrl: '#',
+                    githubUrl: 'https://github.com/Venkata-Siva-Kumar/IceCream.git',
+                },
+                {
+                    title: 'Rock Paper Scissors Game',
+                    description: 'An interactive web-based Rock Paper Scissors game built with React. It features smooth UI design, dynamic game logic, and responsive styling using Tailwind CSS. The game allows users to play against the computer with real-time score updates and engaging visuals.',
+                    skills: ['React', 'JavaScript', 'Tailwind CSS'],
+                    liveUrl: 'https://venkata-siva-kumar.github.io/Rock-Paper-Scissor/',
+                    githubUrl: 'https://github.com/venkata-siva-kumar/Rock-Paper-Scissor',
+                }
+            ];
+
+            const skills = {
+                'Programming Languages': ['JavaScript', 'Python', 'Java', 'C++'],
+                'Front-end Development': ['React', 'React Native', 'HTML5', 'CSS3', 'Tailwind CSS'],
+                'Back-end Development': ['Node.js', 'Express','REST APIs'],
+                'Databases': ['MongoDB', 'MySQL'],
+                'Tools & Platforms': ['Git', 'GitHub', 'VS Code','Render','AivenF'],
+            };
+
+            const socials = [
+                { name: 'LinkedIn', url: 'https://www.linkedin.com/in/venkata-siva-kumar-236102310' },
+                { name: 'GitHub', url: 'https://github.com/Venkata-Siva-Kumar' },
+                { name: 'Twitter', url: 'https://x.com/SivaMariyala' },
+                { name: 'Email', url: 'mailto:mariyalasivakumar@gmail.com' },
+            ];
+
+            // Load and display the profile image
+            const profileImageContainer = document.getElementById('profile-image-container');
+            const fileId = "image_81b199.jpg-ec76e383-928b-4eae-8231-0dc0f4e12323";
+            const imageUrl = `https://storage.googleapis.com/cloud-artifact-content-storage-prod-public/${fileId}`;
+
+            const imgElement = document.createElement('img');
+            imgElement.src = './siva.jpg';
+            imgElement.alt = "Profile";
+            imgElement.className = "rounded-full w-40 h-40 object-cover mx-auto ring-4 ring-purple-500";
+            profileImageContainer.appendChild(imgElement);
+
+            // Populate skills section
+            const skillsContainer = document.getElementById('skills-container');
+            for (const category in skills) {
+                const skillCategoryDiv = document.createElement('div');
+                skillCategoryDiv.className = 'bg-white rounded-xl shadow-md p-6';
+                skillCategoryDiv.innerHTML = `
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">${category}</h3>
+                    <div class="flex flex-wrap gap-2">
+                        ${skills[category].map(skill => `
+                            <span class="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-full">
+                                ${skill}
+                            </span>
+                        `).join('')}
+                    </div>
+                `;
+                skillsContainer.appendChild(skillCategoryDiv);
+            }
+
+            // Populate projects section
+            const projectsContainer = document.getElementById('projects-container');
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden';
+                projectCard.innerHTML = `
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${project.title}</h3>
+                        <p class="text-gray-600 mb-4">${project.description}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.skills.map(skill => `
+                                <span class="bg-gray-200 text-gray-700 text-xs font-medium px-2.5 py-1 rounded-full">
+                                    ${skill}
+                                </span>
+                            `).join('')}
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300">Live Demo</a>
+                            <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="bg-gray-800 text-white font-medium py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300">GitHub</a>
+                        </div>
+                    </div>
+                `;
+                projectsContainer.appendChild(projectCard);
+            });
+
+            // Populate contact modal
+            const socialsContainer = document.getElementById('socials-container');
+            socials.forEach(social => {
+                const socialLink = document.createElement('a');
+                socialLink.href = social.url;
+                socialLink.target = '_blank';
+                socialLink.rel = 'noopener noreferrer';
+                socialLink.className = 'bg-blue-500 text-white font-medium py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors duration-300 transform hover:scale-105';
+                socialLink.textContent = social.name;
+                socialsContainer.appendChild(socialLink);
+            });
+
+            // Modal functionality
+            const contactModal = document.getElementById('contact-modal');
+            const contactButton = document.getElementById('contact-button');
+            const heroContactButton = document.getElementById('hero-contact-button');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            const openModal = () => {
+                contactModal.classList.remove('hidden');
+                contactModal.classList.add('flex');
+            };
+
+            const closeModal = () => {
+                contactModal.classList.remove('flex');
+                contactModal.classList.add('hidden');
+            };
+
+            contactButton.addEventListener('click', openModal);
+            heroContactButton.addEventListener('click', openModal);
+            closeModalButton.addEventListener('click', closeModal);
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) {
+                    closeModal();
+                }
+            });
+
+            // Smooth scrolling for nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
