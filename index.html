@@ -1,299 +1,1371 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-</head>
-<body>
-    <div id="root"></div>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="./src/index.js"></script>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venkata Siva Kumar Mariyala | Portfolio</title>
+    <title>Mariyala Venkata Siva Kumar | Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Caveat:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lightBg: '#ffffff',       // Pure white canvas
+                        lightSection: '#f8fafc',  // Subtle slate-50 background
+                        lightBorder: '#f1f5f9',   // Slate-100 border
+                        darkSlate: '#0f172a',     // Dark slate headings
+                        textSecondary: '#475569', // Slate-600 body text
+                        accentBlue: '#2563eb',    // Premium Electric Blue
+                        accentViolet: '#7c3aed',  // Premium Violet
+                        accentTeal: '#0d9488',    // Teal accent
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        cursive: ['Caveat', 'cursive'],
+                    },
+                    animation: {
+                        'float-1': 'float1 7s ease-in-out infinite',
+                        'float-2': 'float2 9s ease-in-out infinite',
+                        'float-3': 'float3 8s ease-in-out infinite',
+                        'spin-slow': 'spin 30s linear infinite',
+                        'radar-blue': 'radarBlue 4s cubic-bezier(0, 0, 0.2, 1) infinite',
+                    },
+                    keyframes: {
+                        float1: {
+                            '0%, 100%': { transform: 'translateY(0) translateX(0)' },
+                            '50%': { transform: 'translateY(-8px) translateX(4px)' },
+                        },
+                        float2: {
+                            '0%, 100%': { transform: 'translateY(0) translateX(0)' },
+                            '50%': { transform: 'translateY(10px) translateX(-5px)' },
+                        },
+                        float3: {
+                            '0%, 100%': { transform: 'translateY(0) translateX(0)' },
+                            '50%': { transform: 'translateY(-5px) translateX(-6px)' },
+                        },
+                        radarBlue: {
+                            '0%': { transform: 'scale(1)', opacity: '0.4' },
+                            '100%': { transform: 'scale(1.8)', opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        @import url('https://rsms.me/inter/inter.css');
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-        .animate-fade-in {
-            animation: fadeIn 1s ease-in-out;
+
+        ::-webkit-scrollbar-track {
+            background: #ffffff;
         }
-        .animate-fade-in-delay-1 {
-            animation: fadeIn 1s ease-in-out 0.5s forwards;
-            opacity: 0;
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
         }
-        .animate-fade-in-delay-2 {
-            animation: fadeIn 1s ease-in-out 1s forwards;
-            opacity: 0;
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        /* Premium Selection style */
+        ::selection {
+            background: rgba(37, 99, 235, 0.1);
+            color: #2563eb;
+        }
+
+        /* Clean Technical coordinate-grid background style */
+        .tech-grid-bg {
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(to right, rgba(226, 232, 240, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(226, 232, 240, 0.3) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen text-gray-800">
 
-    <!-- Navigation Bar -->
-    <nav class="fixed w-full top-0 z-10 bg-gray-800 bg-opacity-90 backdrop-blur-sm shadow-md py-4">
-        <div class="container mx-auto px-4 md:px-8 max-w-7xl flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-white">Venkata Siva Kumar Mariyala</a>
-            <div class="flex gap-6 md:gap-8 lg:gap-10">
-                <a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300">About</a>
-                <a href="#skills" class="text-gray-300 hover:text-white transition-colors duration-300">Skills</a>
-                <a href="#projects" class="text-gray-300 hover:text-white transition-colors duration-300">Projects</a>
-                <button id="contact-button" class="text-white hover:text-gray-300 transition-colors duration-300">Contact</button>
+<body class="tech-grid-bg text-textSecondary font-inter antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#home"
+                class="text-2xl font-outfit font-extrabold tracking-tight text-darkSlate hover:text-accentBlue transition duration-300 flex items-center gap-2">
+                <span
+                    class="w-8 h-8 rounded-lg bg-gradient-to-tr from-accentBlue to-accentViolet text-white flex items-center justify-center text-sm font-mono"><i
+                        class="fa-solid fa-code"></i></span>
+                <span>App Developer</span>
+            </a>
+
+            <!-- Desktop Nav Items -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about"
+                    class="nav-link relative font-medium text-sm transition-colors duration-300 hover:text-darkSlate py-1 text-slate-500">About</a>
+                <a href="#experience"
+                    class="nav-link relative font-medium text-sm transition-colors duration-300 hover:text-darkSlate py-1 text-slate-500">Experience</a>
+                <a href="#projects"
+                    class="nav-link relative font-medium text-sm transition-colors duration-300 hover:text-darkSlate py-1 text-slate-500">Projects</a>
+                <a href="#skills"
+                    class="nav-link relative font-medium text-sm transition-colors duration-300 hover:text-darkSlate py-1 text-slate-500">Skills</a>
+                <a href="#education-certs"
+                    class="nav-link relative font-medium text-sm transition-colors duration-300 hover:text-darkSlate py-1 text-slate-500">Education</a>
+                <a href="#contact"
+                    class="nav-link relative font-medium text-sm transition-colors duration-300 hover:text-darkSlate py-1 text-slate-500">Contact</a>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn"
+                class="md:hidden text-slate-500 hover:text-darkSlate transition focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white/95 backdrop-blur-lg border-b border-slate-100 px-6 py-4 flex flex-col gap-4 shadow-md">
+            <a href="#about"
+                class="mobile-nav-link text-base font-medium py-1 transition-colors text-slate-500">About</a>
+            <a href="#experience"
+                class="mobile-nav-link text-base font-medium py-1 transition-colors text-slate-500">Experience</a>
+            <a href="#projects"
+                class="mobile-nav-link text-base font-medium py-1 transition-colors text-slate-500">Projects</a>
+            <a href="#skills"
+                class="mobile-nav-link text-base font-medium py-1 transition-colors text-slate-500">Skills</a>
+            <a href="#education-certs"
+                class="mobile-nav-link text-base font-medium py-1 transition-colors text-slate-500">Education</a>
+            <a href="#contact"
+                class="mobile-nav-link text-base font-medium py-1 transition-colors text-slate-500">Contact</a>
         </div>
     </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero" class="relative flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
-            <div class="text-center p-4 md:p-8 z-10">
-                <!-- Profile image will be injected here -->
-                <div id="profile-image-container" class="mb-8"></div>
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 animate-fade-in">
-                    Hello, I'm <span class="text-blue-400">Venkata Siva Kumar Mariyala</span>.
-                </h1>
-                <p class="text-xl md:text-2xl font-light mb-8 animate-fade-in-delay-1">
-                    A passionate Software Developer & App Developer.
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-6 pt-24">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-[85vh] flex flex-col md:flex-row items-center justify-between gap-12 py-12">
+
+            <!-- Hero Left Content -->
+            <div
+                class="w-full md:w-3/5 space-y-6 text-center md:text-left flex flex-col items-center md:items-start justify-center z-10">
+                <div
+                    class="inline-block bg-slate-50 border border-slate-200 text-slate-700 font-mono text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full">
+                    Full-Stack & AI Systems
+                </div>
+
+                <div class="relative">
+                    <h1
+                        class="text-5xl md:text-7xl lg:text-8xl font-cursive font-bold leading-none text-darkSlate tracking-wide">
+                        Mariyala Venkata <br class="hidden lg:block" />
+                        <span
+                            class="bg-gradient-to-r from-accentBlue via-accentViolet to-accentTeal bg-clip-text text-transparent">
+                            Siva Kumar
+                        </span>
+                    </h1>
+                    <!-- Cursive handwritten note in Hero -->
+                    <span
+                        class="absolute -top-6 right-4 md:right-16 text-accentViolet font-cursive text-2xl rotate-6 tracking-wide select-none">
+                        Hello!
+                    </span>
+                </div>
+
+                <div class="text-lg md:text-2xl font-semibold text-slate-700">
+                    I am a <span id="typewriter-text"
+                        class="font-mono text-accentBlue font-bold tracking-wide"></span><span id="typewriter-cursor"
+                        class="text-accentViolet animate-pulse">|</span>
+                </div>
+
+                <p class="text-slate-500 max-w-xl text-base md:text-lg font-normal leading-relaxed">
+                    Computer Science undergraduate building e-commerce and retail-tech systems with React Native,
+                    Node.js, MySQL, and Graph RAG. Strong in Data Structures, Algorithms, and full-stack development,
+                    with a focus on retail technology and customer experience.
                 </p>
-                <button id="hero-contact-button" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 animate-fade-in-delay-2">
-                    Get In Touch
+
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto pt-2">
+                    <a href="#projects"
+                        class="w-full sm:w-auto text-center bg-darkSlate hover:bg-accentBlue text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-slate-900/5 hover:shadow-accentBlue/20 transition duration-300 transform hover:-translate-y-0.5">
+                        Explore Projects
+                    </a>
+                    <a href="#contact"
+                        class="w-full sm:w-auto text-center border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold py-3.5 px-8 rounded-xl transition duration-300 hover:border-slate-300">
+                        Let's Connect
+                    </a>
+                </div>
+
+                <!-- Prominent Contact Connections replacing form triggers -->
+                <div class="flex items-center gap-4 pt-4">
+                    <a href="https://www.linkedin.com/in/venkata-siva-kumar-mariyala-236102310" target="_blank"
+                        rel="noopener noreferrer"
+                        class="w-12 h-12 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-accentBlue hover:border-accentBlue/30 hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm group">
+                        <i class="fa-brands fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://github.com/Venkata-Siva-Kumar" target="_blank" rel="noopener noreferrer"
+                        class="w-12 h-12 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-darkSlate hover:border-slate-300 hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm group">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                    <a href="mailto:mariyalasivakumar@gmail.com"
+                        class="w-12 h-12 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-accentViolet hover:border-accentViolet/30 hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm group">
+                        <i class="fa-solid fa-envelope text-xl"></i>
+                    </a>
+                    <a href="tel:9912141060"
+                        class="w-12 h-12 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-emerald-600 hover:border-emerald-200 hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm group">
+                        <i class="fa-solid fa-phone text-base"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Beautiful Cutout for accenture.png (macOS Floating Window Mockup) -->
+            <div class="w-full md:w-2/5 flex items-center justify-center relative select-none z-10">
+
+                <!-- Radar rings behind the mockup for visual depth -->
+                <div
+                    class="absolute w-72 h-72 md:w-96 md:h-96 rounded-full border border-slate-100 animate-radar-blue pointer-events-none">
+                </div>
+                <div class="absolute w-72 h-72 md:w-96 md:h-96 rounded-full border border-slate-200 animate-radar-blue pointer-events-none"
+                    style="animation-delay: 2s;"></div>
+
+                <!-- Cursive annotation above the certificate mockup -->
+                <span
+                    class="absolute -top-12 left-10 text-accentViolet font-cursive text-2xl -rotate-6 tracking-wide select-none">
+                    Accenture Internship
+                </span>
+
+                <!-- Translucent Mockup Card Container -->
+                <div
+                    class="w-full max-w-md bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(15,23,42,0.08)] backdrop-blur-md transform rotate-3 hover:rotate-0 hover:scale-[1.03] transition-all duration-500 cursor-pointer group">
+
+
+
+                    <!-- Image Display -->
+                    <div class="relative overflow-hidden aspect-[1.5] bg-slate-50">
+                        <img src="./accenture.png" alt="Accenture Internship Certificate"
+                            class="w-full h-full object-cover group-hover:scale-102 transition duration-700">
+                        <!-- Subtle glass shine overlay -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 pointer-events-none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="py-24 border-t border-slate-100">
+            <div class="text-center space-y-3 mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-outfit font-extrabold tracking-tight text-darkSlate">
+                    About Me
+                </h2>
+                <div class="w-12 h-1 bg-accentBlue mx-auto rounded-full"></div>
+            </div>
+
+            <div
+                class="max-w-5xl mx-auto bg-slate-50/50 border border-slate-100 rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.01)] backdrop-blur-sm relative">
+
+                <!-- Cursive floating note in About -->
+                <span
+                    class="absolute -top-4 right-8 text-accentTeal font-cursive text-2xl -rotate-6 tracking-wide select-none">
+                    retail-tech & AI
+                </span>
+
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="flex-1 space-y-6 text-slate-600 leading-relaxed text-base md:text-lg">
+                        <p>
+                            I am Mariyala Venkata Siva Kumar, a passionate Computer Science and Engineering
+                            undergraduate
+                            at SASTRA Deemed University with a strong foundation in problem-solving, software
+                            development,
+                            and Data structures & algorithms.
+                        </p>
+                        <p>
+                            My developer journey is anchored on building efficient software architectures and
+                            applications that make an impact.
+                            During my internships and project development, I have focused heavily on integrating
+                            intelligent solutions
+                            like <span class="text-accentBlue font-semibold">Graph RAG</span> and machine learning into
+                            operational systems (such as high-performance conversational bots
+                            and multitemporal change-detection apps).
+                        </p>
+                        <p>
+                            With a solid grounding in <span class="text-accentViolet font-semibold">React Native,
+                                Node.js, and MySQL</span>, I enjoy handling complex architectural questions—spanning
+                            from OTP validations in logistics workflows to vector embeddings in conversational search.
+                        </p>
+                    </div>
+
+                    <!-- Quick stats board -->
+                    <div class="grid grid-cols-2 gap-4 w-full md:w-80 flex-shrink-0">
+                        <div
+                            class="p-5 bg-white border border-slate-100 rounded-2xl flex flex-col justify-center items-center text-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:border-accentBlue/40">
+                            <span class="text-[10px] text-slate-400 uppercase font-mono tracking-widest font-bold">CGPA
+                                (B.Tech)</span>
+                            <span class="text-lg font-outfit font-bold text-darkSlate mt-2">9.16/10</span>
+                        </div>
+                        <div
+                            class="p-5 bg-white border border-slate-100 rounded-2xl flex flex-col justify-center items-center text-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:border-accentViolet/40">
+                            <span
+                                class="text-[10px] text-slate-400 uppercase font-mono tracking-widest font-bold">Internship</span>
+                            <span class="text-lg font-outfit font-bold text-darkSlate mt-2">Accenture</span>
+                        </div>
+                        <div
+                            class="p-5 bg-white border border-slate-100 rounded-2xl flex flex-col justify-center items-center text-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:border-accentTeal/40">
+                            <span
+                                class="text-[10px] text-slate-400 uppercase font-mono tracking-widest font-bold">Projects</span>
+                            <span class="text-lg font-outfit font-bold text-darkSlate mt-2">3+ Live</span>
+                        </div>
+                        <div
+                            class="p-5 bg-white border border-slate-100 rounded-2xl flex flex-col justify-center items-center text-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:border-slate-300">
+                            <span class="text-[10px] text-slate-400 uppercase font-mono tracking-widest font-bold">Core
+                                Focus</span>
+                            <span class="text-lg font-outfit font-bold text-darkSlate mt-2">Retail & AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACCENTURE INTERNSHIP EXPERIENCE -->
+        <section id="experience" class="py-24 border-t border-slate-100">
+            <div class="text-center space-y-3 mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-outfit font-extrabold tracking-tight text-darkSlate">
+                    Work Experience
+                </h2>
+                <div class="w-12 h-1 bg-accentBlue mx-auto rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto relative pl-8 md:pl-12 border-l-2 border-slate-100 space-y-12">
+
+                <!-- Timeline pointer dot -->
+                <div
+                    class="absolute left-[-9px] top-6 w-4 h-4 bg-accentBlue rounded-full border-4 border-white shadow-md shadow-accentBlue/20">
+                </div>
+
+                <div
+                    class="bg-white border border-slate-100 rounded-3xl p-6 md:p-10 shadow-[0_15px_40px_rgba(0,0,0,0.02)] transition-all duration-300 hover:border-slate-200 hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)] relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-slate-50 rounded-bl-full pointer-events-none group-hover:bg-accentBlue/5 transition duration-300">
+                    </div>
+
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h3
+                                class="text-2xl font-outfit font-bold text-darkSlate group-hover:text-accentBlue transition duration-300">
+                                AI/Software Development Intern
+                            </h3>
+                            <span class="text-accentBlue font-bold text-base font-mono">
+                                @Accenture
+                            </span>
+                        </div>
+                        <div
+                            class="inline-block bg-slate-50 border border-slate-100 text-slate-500 font-mono text-xs px-4 py-1.5 rounded-full w-fit">
+                            <i class="fa-regular fa-calendar-days mr-2"></i> May 2026 – July 2026
+                        </div>
+                    </div>
+
+                    <!-- Interactive bullet triggers -->
+                    <div
+                        class="mb-4 text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                        <span>Key Technical Focus Areas</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span
+                            class="experience-tag bg-slate-50 hover:bg-accentBlue hover:text-white text-slate-600 text-xs font-semibold px-3.5 py-1.5 rounded-xl border border-slate-100 hover:border-accentBlue transition-all duration-200 cursor-pointer"
+                            data-bullet="0">Conversational AI</span>
+                        <span
+                            class="experience-tag bg-slate-50 hover:bg-accentBlue hover:text-white text-slate-600 text-xs font-semibold px-3.5 py-1.5 rounded-xl border border-slate-100 hover:border-accentBlue transition-all duration-200 cursor-pointer"
+                            data-bullet="1">Graph RAG</span>
+                        <span
+                            class="experience-tag bg-slate-50 hover:bg-accentBlue hover:text-white text-slate-600 text-xs font-semibold px-3.5 py-1.5 rounded-xl border border-slate-100 hover:border-accentBlue transition-all duration-200 cursor-pointer"
+                            data-bullet="2">Sentence Transformers</span>
+                        <span
+                            class="experience-tag bg-slate-50 hover:bg-accentBlue hover:text-white text-slate-600 text-xs font-semibold px-3.5 py-1.5 rounded-xl border border-slate-100 hover:border-accentBlue transition-all duration-200 cursor-pointer"
+                            data-bullet="3">Agile Collaboration</span>
+                    </div>
+
+                    <ul class="space-y-4 text-slate-600 text-base leading-relaxed font-normal">
+                        <li class="experience-bullet flex gap-3 items-start transition-all duration-300" data-index="0">
+                            <span class="text-accentBlue mt-1.5"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i></span>
+                            <span>Developed an AI-powered conversational commerce chatbot to enhance customer
+                                interactions and automate product-related queries for an e-commerce platform.</span>
+                        </li>
+                        <li class="experience-bullet flex gap-3 items-start transition-all duration-300" data-index="1">
+                            <span class="text-accentBlue mt-1.5"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i></span>
+                            <span>Implemented Graph RAG for intelligent product search, similar product recommendations,
+                                reorder suggestions, customer-specific pricing, and slab-based pricing queries –
+                                directly applicable to retail recommendation and personalization systems.</span>
+                        </li>
+                        <li class="experience-bullet flex gap-3 items-start transition-all duration-300" data-index="2">
+                            <span class="text-accentBlue mt-1.5"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i></span>
+                            <span>Leveraged the sentence-transformers/all-MiniLM-L6-v2 embedding model for semantic
+                                intent detection, context-aware FAQ retrieval, and query rewriting, improving chatbot
+                                response accuracy.</span>
+                        </li>
+                        <li class="experience-bullet flex gap-3 items-start transition-all duration-300" data-index="3">
+                            <span class="text-accentBlue mt-1.5"><i
+                                    class="fa-solid fa-chevron-right text-xs"></i></span>
+                            <span>Collaborated with cross-functional teams to build scalable, production-grade AI
+                                solutions following agile development practices.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-24 border-t border-slate-100">
+            <div class="text-center space-y-3 mb-10">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-outfit font-extrabold tracking-tight text-darkSlate">
+                    Projects
+                </h2>
+                <div class="w-12 h-1 bg-accentBlue mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="flex justify-center gap-3 mb-12 flex-wrap">
+                <button
+                    class="project-filter-btn px-6 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 bg-darkSlate text-white shadow-md"
+                    data-filter="all">All Projects</button>
+                <button
+                    class="project-filter-btn px-6 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:text-darkSlate hover:border-slate-300"
+                    data-filter="mobile">Mobile Apps</button>
+                <button
+                    class="project-filter-btn px-6 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:text-darkSlate hover:border-slate-300"
+                    data-filter="ai">AI & ML</button>
+                <button
+                    class="project-filter-btn px-6 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:text-darkSlate hover:border-slate-300"
+                    data-filter="web">Web Games</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+                <!-- Project 1 (SG Store Badvel) -->
+                <div class="project-card bg-white border border-slate-100 hover:border-slate-200 rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.01)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-300 flex flex-col group"
+                    data-category="mobile">
+                    <div class="p-8 flex-1 flex flex-col justify-between space-y-6">
+                        <div>
+                            <div class="flex justify-between items-start gap-4 mb-3">
+                                <div class="flex gap-4 items-center">
+                                    <!-- Official Play Store Icon for SG Store Badvel -->
+                                    <div
+                                        class="w-14 h-14 rounded-2xl overflow-hidden shadow-md group-hover:scale-105 transition duration-300 flex-shrink-0 bg-slate-50 border border-slate-100 flex items-center justify-center">
+                                        <img src="https://play-lh.googleusercontent.com/nlx2BGcmjV-Ev4160QgGjsysC4d-hi8UTff3wg-LoLONxJyVW5LbfApqM7sBJ7EFIYsSjo3vK2P1457XOruonk0=w240-h240"
+                                            alt="SG Store Badvel App Icon" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="text-[10px] font-mono font-bold uppercase tracking-widest text-accentBlue">Grocery
+                                            E-Commerce (Badvel)</span>
+                                        <h3
+                                            class="text-xl font-outfit font-bold text-darkSlate group-hover:text-accentBlue transition-colors duration-300 mt-0.5">
+                                            SG Store Badvel
+                                        </h3>
+                                    </div>
+                                </div>
+                                <span
+                                    class="px-2.5 py-1 bg-slate-50 border border-slate-100 text-emerald-600 text-[9px] font-bold uppercase rounded-md tracking-wider flex-shrink-0 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Live App
+                                </span>
+                            </div>
+
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6 font-normal">
+                                An online shopping application designed for ordering groceries and daily essentials from
+                                local Kirana stores. It manages catalog search, checkout, CoD payment, and order
+                                tracking.
+                            </p>
+
+                            <div class="mb-6 space-y-2">
+                                <span
+                                    class="text-[10px] text-slate-400 uppercase tracking-widest block font-bold font-mono">Key
+                                    Features & Metrics:</span>
+                                <ul class="space-y-2">
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Served grocery deliveries for over 1000+ local customers in Badvel.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Secure login and signup using mobile number verification.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Includes category-wise browsing, cart management, and order history
+                                            logs.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6">
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">React
+                                    Native</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">Node.js</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">MySQL</span>
+
+                            </div>
+
+                            <div class="flex gap-3 border-t border-slate-100 pt-4">
+                                <a href="https://play.google.com/store/apps/details?id=com.venkata_siva.kiranastoreapp&pcampaignid=web_share"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="flex items-center gap-2 bg-accentBlue hover:bg-accentBlue/95 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition duration-300">
+                                    <i class="fa-brands fa-google-play text-[11px]"></i> Google Play
+                                </a>
+                                <a href="https://github.com/Venkata-Siva-Kumar/SG-Store-Badvel.git" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-xs py-2.5 px-4 rounded-xl transition duration-300">
+                                    <i class="fa-brands fa-github text-sm"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Sri Vasavi Stores Kota) -->
+                <div class="project-card bg-white border border-slate-100 hover:border-slate-200 rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.01)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-300 flex flex-col group"
+                    data-category="mobile">
+                    <div class="p-8 flex-1 flex flex-col justify-between space-y-6">
+                        <div>
+                            <div class="flex justify-between items-start gap-4 mb-3">
+                                <div class="flex gap-4 items-center">
+                                    <!-- Official Play Store Icon for Sri Vasavi Stores Kota -->
+                                    <div
+                                        class="w-14 h-14 rounded-2xl overflow-hidden shadow-md group-hover:scale-105 transition duration-300 flex-shrink-0 bg-slate-50 border border-slate-100 flex items-center justify-center">
+                                        <img src="https://play-lh.googleusercontent.com/EQxfG8Fsi176iel1-j1FGF_qg2hRIMEYHJAcB7dzo-SXJNrd3tI7B3JlEkA2Jvj6ecvIp1uB7RLhZVtPLCtbEQ=w240-h240"
+                                            alt="Sri Vasavi Stores Kota App Icon" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="text-[10px] font-mono font-bold uppercase tracking-widest text-accentBlue">Grocery
+                                            Delivery (Kota)</span>
+                                        <h3
+                                            class="text-xl font-outfit font-bold text-darkSlate group-hover:text-accentBlue transition-colors duration-300 mt-0.5">
+                                            Sri Vasavi Stores Kota
+                                        </h3>
+                                    </div>
+                                </div>
+                                <span
+                                    class="px-2.5 py-1 bg-slate-50 border border-slate-100 text-emerald-600 text-[9px] font-bold uppercase rounded-md tracking-wider flex-shrink-0 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Live App
+                                </span>
+                            </div>
+
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6 font-normal">
+                                One-stop solution for ordering groceries and daily essentials online from trusted local
+                                Kirana store Sri Vasavi Stores in Kota, featuring quick doorstep delivery.
+                            </p>
+
+                            <div class="mb-6 space-y-2">
+                                <span
+                                    class="text-[10px] text-slate-400 uppercase tracking-widest block font-bold font-mono">Key
+                                    Features & Metrics:</span>
+                                <ul class="space-y-2">
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Robust address management (add, edit, delete, and select) for delivery
+                                            tracking.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Detailed list-building with instant cart sum and weight metrics
+                                            updates.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Streamlined checkout experience with live delivery distance
+                                            indicators.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6">
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">React
+                                    Native</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">Node.js</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">MySQL</span>
+
+                            </div>
+
+                            <div class="flex gap-3 border-t border-slate-100 pt-4">
+                                <a href="https://play.google.com/store/apps/details?id=com.srivasavi.store&pcampaignid=web_share"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="flex items-center gap-2 bg-accentBlue hover:bg-accentBlue/95 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition duration-300">
+                                    <i class="fa-brands fa-google-play text-[11px]"></i> Google Play
+                                </a>
+                                <a href="https://github.com/Venkata-Siva-Kumar/Vasavi-Stores" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-xs py-2.5 px-4 rounded-xl transition duration-300">
+                                    <i class="fa-brands fa-github text-sm"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Building Change ML) -->
+                <div class="project-card bg-white border border-slate-100 hover:border-slate-200 rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.01)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-300 flex flex-col group"
+                    data-category="ai">
+                    <div class="p-8 flex-1 flex flex-col justify-between space-y-6">
+                        <div>
+                            <div class="flex justify-between items-start gap-4 mb-3">
+                                <div class="flex gap-4 items-center">
+                                    <!-- App Launcher Icon for Satellite -->
+                                    <div
+                                        class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-accentTeal to-emerald-500 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition duration-300 flex-shrink-0">
+                                        <i class="fa-solid fa-satellite"></i>
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="text-[10px] font-mono font-bold uppercase tracking-widest text-accentBlue">Multitemporal
+                                            Satellite Image ML</span>
+                                        <h3
+                                            class="text-xl font-outfit font-bold text-darkSlate group-hover:text-accentBlue transition-colors duration-300 mt-0.5">
+                                            Building Change Analysis
+                                        </h3>
+                                    </div>
+                                </div>
+                                <span
+                                    class="px-2.5 py-1 bg-slate-50 border border-slate-100 text-slate-400 text-[9px] font-bold uppercase rounded-md tracking-wider flex-shrink-0">
+                                    AI & ML
+                                </span>
+                            </div>
+
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6 font-normal">
+                                Applied machine learning and image processing techniques to identify and analyze changes
+                                across time-series satellite imagery.
+                            </p>
+
+                            <div class="mb-6 space-y-2">
+                                <span
+                                    class="text-[10px] text-slate-400 uppercase tracking-widest block font-bold font-mono">Key
+                                    Features:</span>
+                                <ul class="space-y-2">
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Applied advanced ML and computer vision algorithms to detect urban
+                                            modifications.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Performed detailed image preprocessing and custom feature extraction to
+                                            maximize change-detection precision.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Visualized detection results to support data-driven decisions for urban
+                                            planning and land-use analysis.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6">
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">Python</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">Machine
+                                    Learning</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">Image
+                                    Processing</span>
+                            </div>
+
+                            <div class="flex gap-3 border-t border-slate-100 pt-4">
+                                <a href="https://github.com/Venkata-Siva-Kumar/Deep-Learning-Mini-Project"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-xs py-2.5 px-4 rounded-xl transition duration-300">
+                                    <i class="fa-brands fa-github text-sm"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 (Rock Paper Scissors Game) -->
+                <div class="project-card bg-white border border-slate-100 hover:border-slate-200 rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.01)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.03)] transition-all duration-300 flex flex-col group"
+                    data-category="web">
+                    <div class="p-8 flex-1 flex flex-col justify-between space-y-6">
+                        <div>
+                            <div class="flex justify-between items-start gap-4 mb-3">
+                                <div class="flex gap-4 items-center">
+                                    <!-- App Launcher Icon for RPS -->
+                                    <div
+                                        class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-accentViolet to-pink-500 text-white flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition duration-300 flex-shrink-0">
+                                        <i class="fa-solid fa-hand-scissors"></i>
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="text-[10px] font-mono font-bold uppercase tracking-widest text-accentBlue">Interactive
+                                            Web Game</span>
+                                        <h3
+                                            class="text-xl font-outfit font-bold text-darkSlate group-hover:text-accentBlue transition-colors duration-300 mt-0.5">
+                                            Rock Paper Scissors Game
+                                        </h3>
+                                    </div>
+                                </div>
+                                <span
+                                    class="px-2.5 py-1 bg-slate-50 border border-slate-100 text-slate-400 text-[9px] font-bold uppercase rounded-md tracking-wider flex-shrink-0">
+                                    Web Game
+                                </span>
+                            </div>
+
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6 font-normal">
+                                An interactive web-based Rock Paper Scissors game featuring smooth animations, dynamic
+                                game logic, and score state trackers.
+                            </p>
+
+                            <div class="mb-6 space-y-2">
+                                <span
+                                    class="text-[10px] text-slate-400 uppercase tracking-widest block font-bold font-mono">Key
+                                    Features:</span>
+                                <ul class="space-y-2">
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Designed engaging visual feedback loops for user-versus-bot
+                                            actions.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Maintained persistent local scores and high streaks using state
+                                            validation.</span>
+                                    </li>
+                                    <li
+                                        class="text-xs text-slate-600 flex gap-2 items-start font-normal leading-relaxed">
+                                        <span class="text-accentBlue mt-1"><i
+                                                class="fa-solid fa-circle-notch text-[8px]"></i></span>
+                                        <span>Styled with glowing components and mobile-responsive layouts.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6">
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">React</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">JavaScript</span>
+                                <span
+                                    class="bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg">Tailwind
+                                    CSS</span>
+                            </div>
+
+                            <div class="flex gap-3 border-t border-slate-100 pt-4">
+                                <a href="https://venkata-siva-kumar.github.io/Rock-Paper-Scissor/" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-center gap-2 bg-accentBlue hover:bg-accentBlue/95 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition duration-300">
+                                    <i class="fa-solid fa-external-link-alt text-[10px]"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/venkata-siva-kumar/Rock-Paper-Scissor" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-xs py-2.5 px-4 rounded-xl transition duration-300">
+                                    <i class="fa-brands fa-github text-sm"></i> Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS SECTION -->
+        <section id="skills" class="py-24 border-t border-slate-100">
+            <div class="text-center space-y-3 mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-outfit font-extrabold tracking-tight text-darkSlate">
+                    Technical Skills
+                </h2>
+                <div class="w-12 h-1 bg-accentBlue mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Simplified Technical Skills Grid -->
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Category 1 -->
+                <div
+                    class="bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:border-slate-200 transition duration-300">
+                    <h3
+                        class="text-md font-bold text-darkSlate border-b border-slate-100 pb-3 mb-4 flex items-center gap-2.5">
+                        <span class="text-accentBlue"><i class="fa-solid fa-code"></i></span> Programming Languages
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Java</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Python</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">C++</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">SQL</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">HTML/CSS</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div
+                    class="bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:border-slate-200 transition duration-300">
+                    <h3
+                        class="text-md font-bold text-darkSlate border-b border-slate-100 pb-3 mb-4 flex items-center gap-2.5">
+                        <span class="text-accentViolet"><i class="fa-solid fa-cubes"></i></span> Frameworks & Libraries
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">React
+                            Native</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">React</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Node.js</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Express.js</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">FastAPI</span>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div
+                    class="bg-white border border-slate-100 rounded-2xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.01)] hover:border-slate-200 transition duration-300">
+                    <h3
+                        class="text-md font-bold text-darkSlate border-b border-slate-100 pb-3 mb-4 flex items-center gap-2.5">
+                        <span class="text-accentTeal"><i class="fa-solid fa-database"></i></span> Databases & Core CS
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">MySQL</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">MongoDB</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Data
+                            Structures</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">Algorithms</span>
+                        <span
+                            class="bg-slate-50 border border-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg">OOP</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Strengths section with cursive tag -->
+            <div
+                class="max-w-4xl mx-auto mt-12 bg-slate-50/50 border border-slate-100 rounded-3xl p-8 text-center relative">
+                <span class="absolute -top-4 right-1/4 text-accentViolet font-cursive text-2xl rotate-3 select-none">
+                    strengths
+                </span>
+                <span
+                    class="text-[10px] uppercase font-mono font-bold tracking-widest text-slate-400 mb-4 block">Personal
+                    Strengths</span>
+                <div class="flex flex-wrap justify-center gap-2.5">
+                    <span
+                        class="bg-white border border-slate-100 text-slate-600 text-xs font-semibold px-4.5 py-2 rounded-xl">Problem
+                        Solving</span>
+                    <span
+                        class="bg-white border border-slate-100 text-slate-600 text-xs font-semibold px-4.5 py-2 rounded-xl">Teamwork</span>
+                    <span
+                        class="bg-white border border-slate-100 text-slate-600 text-xs font-semibold px-4.5 py-2 rounded-xl">Agile
+                        Collaboration</span>
+                    <span
+                        class="bg-white border border-slate-100 text-slate-600 text-xs font-semibold px-4.5 py-2 rounded-xl">Effective
+                        Communication</span>
+                    <span
+                        class="bg-white border border-slate-100 text-slate-600 text-xs font-semibold px-4.5 py-2 rounded-xl">Leadership</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & CERTIFICATIONS -->
+        <section id="education-certs" class="py-24 border-t border-slate-100">
+            <div class="text-center space-y-3 mb-12">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-outfit font-extrabold tracking-tight text-darkSlate">
+                    Education & Certifications
+                </h2>
+                <div class="w-12 h-1 bg-accentBlue mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Tabs header -->
+            <div class="flex justify-center gap-4 mb-12">
+                <button id="tab-edu-btn"
+                    class="flex items-center gap-2 px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-bold transition-all duration-200 bg-darkSlate text-white shadow-md">
+                    <i class="fa-solid fa-graduation-cap"></i> Education
+                </button>
+                <button id="tab-cert-btn"
+                    class="flex items-center gap-2 px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-bold transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:text-darkSlate">
+                    <i class="fa-solid fa-award"></i> Certifications
                 </button>
             </div>
+
+            <!-- Education Tab Container -->
+            <div id="education-container" class="max-w-4xl mx-auto space-y-8">
+
+                <!-- SASTRA -->
+                <div
+                    class="bg-white border border-slate-100 hover:border-slate-200 rounded-3xl p-6 md:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.01)] transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-accentBlue"></div>
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-mono text-accentBlue font-bold tracking-wider uppercase">2023 –
+                                2027</span>
+                            <h3
+                                class="text-2xl font-outfit font-bold text-darkSlate mt-1 group-hover:text-accentBlue transition-colors duration-300">
+                                SASTRA Deemed University
+                            </h3>
+                            <p class="text-slate-700 font-semibold text-base mt-2 flex items-center gap-2">
+                                <span class="text-accentBlue"><i class="fa-solid fa-chevron-right text-xs"></i></span>
+                                B.Tech. Computer Science & Engineering
+                            </p>
+                            <p class="text-slate-500 text-sm mt-3 font-normal leading-relaxed">
+                                Currently focusing on advanced algorithms, database systems, AI engineering, and
+                                full-stack retail tech architectures.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3.5 text-center min-w-[130px] h-fit flex-shrink-0">
+                            <span
+                                class="text-[10px] text-slate-400 block uppercase font-mono tracking-widest font-bold">Score</span>
+                            <span class="text-lg font-bold text-darkSlate mt-1 block">9.16 CGPA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Narayana -->
+                <div
+                    class="bg-white border border-slate-100 hover:border-slate-200 rounded-3xl p-6 md:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.01)] transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-accentViolet"></div>
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-mono text-accentViolet font-bold tracking-wider uppercase">2021 –
+                                2023</span>
+                            <h3
+                                class="text-2xl font-outfit font-bold text-darkSlate mt-1 group-hover:text-accentViolet transition-colors duration-300">
+                                Narayana Junior College
+                            </h3>
+                            <p class="text-slate-700 font-semibold text-base mt-2 flex items-center gap-2">
+                                <span class="text-accentViolet"><i class="fa-solid fa-chevron-right text-xs"></i></span>
+                                Intermediate Education
+                            </p>
+                            <p class="text-slate-500 text-sm mt-3 font-normal leading-relaxed">
+                                Specialized in Mathematics, Physics, and Chemistry.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3.5 text-center min-w-[130px] h-fit flex-shrink-0">
+                            <span
+                                class="text-[10px] text-slate-400 block uppercase font-mono tracking-widest font-bold">Score</span>
+                            <span class="text-lg font-bold text-darkSlate mt-1 block">97.5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servite -->
+                <div
+                    class="bg-white border border-slate-100 hover:border-slate-200 rounded-3xl p-6 md:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.01)] transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-accentTeal"></div>
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-mono text-accentTeal font-bold tracking-wider uppercase">2020 –
+                                2021</span>
+                            <h3
+                                class="text-2xl font-outfit font-bold text-darkSlate mt-1 group-hover:text-accentTeal transition-colors duration-300">
+                                Servite English High School
+                            </h3>
+                            <p class="text-slate-700 font-semibold text-base mt-2 flex items-center gap-2">
+                                <span class="text-accentTeal"><i class="fa-solid fa-chevron-right text-xs"></i></span>
+                                10th Standard (SSC)
+                            </p>
+                            <p class="text-slate-500 text-sm mt-3 font-normal leading-relaxed">
+                                Acquired a perfect academic score, representing strong general analytical skills.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3.5 text-center min-w-[130px] h-fit flex-shrink-0">
+                            <span
+                                class="text-[10px] text-slate-400 block uppercase font-mono tracking-widest font-bold">Score</span>
+                            <span class="text-lg font-bold text-darkSlate mt-1 block">100%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Certifications Tab Container (Hidden by default) -->
+            <div id="certifications-container" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+
+                <!-- Cert 1 -->
+                <div
+                    class="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 flex gap-5 items-center transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-14 h-14 rounded-xl border bg-blue-50 text-accentBlue border-blue-100 flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:scale-105 transition duration-300 shadow-sm">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-base font-outfit font-bold text-darkSlate leading-snug group-hover:text-accentBlue transition duration-300">
+                            React Native Full Course
+                        </h3>
+                        <p class="text-xs text-slate-400 font-medium mt-1 font-mono">Cursa</p>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div
+                    class="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 flex gap-5 items-center transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-14 h-14 rounded-xl border bg-purple-50 text-accentViolet border-purple-100 flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:scale-105 transition duration-300 shadow-sm">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-base font-outfit font-bold text-darkSlate leading-snug group-hover:text-accentBlue transition duration-300">
+                            Introduction to GitHub Copilot
+                        </h3>
+                        <p class="text-xs text-slate-400 font-medium mt-1 font-mono">Microsoft & Simplilearn</p>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div
+                    class="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 flex gap-5 items-center transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-14 h-14 rounded-xl border bg-orange-50 text-orange-600 border-orange-100 flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:scale-105 transition duration-300 shadow-sm">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-base font-outfit font-bold text-darkSlate leading-snug group-hover:text-accentBlue transition duration-300">
+                            TCS iON Career Edge – Young Professional
+                        </h3>
+                        <p class="text-xs text-slate-400 font-medium mt-1 font-mono">TCS iON</p>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div
+                    class="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 flex gap-5 items-center transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-14 h-14 rounded-xl border bg-amber-50 text-amber-600 border-amber-100 flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:scale-105 transition duration-300 shadow-sm">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h3
+                            class="text-base font-outfit font-bold text-darkSlate leading-snug group-hover:text-accentBlue transition duration-300">
+                            EY Certificate of Appreciation
+                        </h3>
+                        <p class="text-xs text-slate-400 font-medium mt-1 font-mono">Round 2: Detailed Presentation
+                            Submission</p>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-4 md:px-8 max-w-7xl">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 text-gray-800">About Me</h2>
-                <div class="text-center text-lg max-w-3xl mx-auto text-gray-600">
-                    <p class="mb-4">
-                        I'm Mariyala Venkata Siva Kumar, a passionate Computer Science and Engineering undergraduate 
-                        at SASTRA Deemed University with a strong foundation in problem-solving, software development, 
-                        and Data structures & algorithms.
-                        I enjoy building efficient solutions and developing applications that make a real impact.
-                        With strong communication, time management, and analytical skills, I am constantly exploring new technologies and refining my expertise. 
-                    </p>
-                    <p>
-                        I am particularly interested in software development, full-stack applications, and innovative problem-solving. 
-                        I aspire to contribute to impactful projects through internships and real-world applications. Beyond academics, 
-                        I thrive in collaborative environments where I can learn, grow, and apply my knowledge to solve meaningful challenges.
-                    </p>
+        <!-- SIMPLIFIED CONTACT SECTION -->
+        <section id="contact" class="py-24 border-t border-slate-100 max-w-4xl mx-auto">
+            <div class="text-center space-y-3 mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-outfit font-extrabold tracking-tight text-darkSlate">
+                    Let's Connect
+                </h2>
+                <div class="w-12 h-1 bg-accentBlue mx-auto rounded-full"></div>
+            </div>
+
+            <div
+                class="bg-slate-50/60 border border-slate-100 rounded-3xl p-8 md:p-12 text-center relative max-w-2xl mx-auto shadow-[0_10px_35px_rgba(0,0,0,0.005)]">
+
+                <!-- Cursive tag in contact footer -->
+                <span
+                    class="absolute -top-5 left-8 text-accentViolet font-cursive text-2xl rotate-6 tracking-wide select-none">
+                    get in touch!
+                </span>
+
+                <h3 class="text-2xl md:text-3xl font-outfit font-bold text-darkSlate mb-4">Mariyala Venkata Siva Kumar
+                </h3>
+                <p class="text-slate-500 text-base leading-relaxed font-normal mb-8">
+                    I'm seeking software internship and full-time positions where I can apply my experience in React
+                    Native, Node.js, and AI systems. Direct paths are below:
+                </p>
+
+                <!-- High Impact Social Links in Grid layout -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl mx-auto">
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/venkata-siva-kumar-mariyala-236102310" target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex flex-col items-center gap-2 p-4 bg-white border border-slate-200 hover:border-accentBlue rounded-2xl transition duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-md transform hover:-translate-y-1">
+                        <span
+                            class="w-10 h-10 rounded-full bg-blue-50 text-accentBlue flex items-center justify-center text-lg"><i
+                                class="fa-brands fa-linkedin-in"></i></span>
+                        <span class="text-xs font-bold text-slate-700 tracking-wider">LINKEDIN</span>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/Venkata-Siva-Kumar" target="_blank" rel="noopener noreferrer"
+                        class="flex flex-col items-center gap-2 p-4 bg-white border border-slate-200 hover:border-darkSlate rounded-2xl transition duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-md transform hover:-translate-y-1">
+                        <span
+                            class="w-10 h-10 rounded-full bg-slate-100 text-darkSlate flex items-center justify-center text-lg"><i
+                                class="fa-brands fa-github"></i></span>
+                        <span class="text-xs font-bold text-slate-700 tracking-wider">GITHUB</span>
+                    </a>
+
+                    <!-- Mail -->
+                    <a href="mailto:mariyalasivakumar@gmail.com"
+                        class="flex flex-col items-center gap-2 p-4 bg-white border border-slate-200 hover:border-accentViolet rounded-2xl transition duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-md transform hover:-translate-y-1">
+                        <span
+                            class="w-10 h-10 rounded-full bg-purple-50 text-accentViolet flex items-center justify-center text-lg"><i
+                                class="fa-solid fa-envelope"></i></span>
+                        <span class="text-xs font-bold text-slate-700 tracking-wider">EMAIL</span>
+                    </a>
+
+                </div>
+
+                <div
+                    class="mt-8 pt-6 border-t border-slate-200/50 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs font-mono text-slate-400">
+                    <div><i class="fa-solid fa-envelope mr-1.5 text-accentBlue"></i> mariyalasivakumar@gmail.com</div>
+                    <div class="hidden sm:block">|</div>
+                    <div><i class="fa-solid fa-phone mr-1.5 text-accentViolet"></i> +91 9912141060</div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-16 md:py-24 bg-gray-100">
-            <div class="container mx-auto px-4 md:px-8 max-w-7xl">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 text-gray-800">My Skills</h2>
-                <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Skills will be injected here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-4 md:px-8 max-w-7xl">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 text-gray-800">My Projects</h2>
-                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Projects will be injected here -->
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-6 text-center">
-        <div class="container mx-auto px-4 md:px-8 max-w-7xl">
-            <p>&copy; 2024 All Rights Reserved.</p>
+    <footer class="bg-slate-50 border-t border-slate-100 py-8 mt-20 text-center relative">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-4">
+            <p class="text-sm text-slate-400 font-normal">
+                &copy; 2026 Mariyala Venkata Siva Kumar. All rights reserved.
+            </p>
         </div>
+        <!-- Cursive footnote -->
+
     </footer>
 
-    <!-- Contact Modal -->
-    <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-gray-900 bg-opacity-75 backdrop-blur-sm transition-opacity duration-300">
-        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative transform transition-all duration-300 scale-100 opacity-100">
-            <button id="close-modal-button" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-            <div class="text-center">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Let's Connect!</h3>
-                <p class="text-gray-600 mb-6">
-                    I'm always open to new opportunities. Feel free to reach out.
-                </p>
-                <div id="socials-container" class="flex flex-col gap-4">
-                    <!-- Social links will be injected here -->
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Native JavaScript for Portfolio Interactivity -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            const projects = [
-                {
-                    title: 'Ecommerce Application',
-                    description: 'A full-featured Ecommerce web application that allows users to browse products, add items to the cart, manage addresses, and securely place orders. Built with React for the frontend and Node.js + Express for the backend, the app integrates with MongoDB for database management and features responsive design with Tailwind CSS. It also includes authentication, order tracking, and a seamless checkout experience.',
-                    skills: ['React', 'React Native', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
-                    liveUrl: 'https://play.google.com/store/apps/details?id=com.venkata_siva.kiranastoreapp',
-                    githubUrl: 'https://github.com/Venkata-Siva-Kumar/finalsrc.git',
-                },
-                {
-                    title: 'Gemini Ice Cream App',
-                    description: 'A mobile application for an ice cream shop that enables customers to browse flavors, customize orders, and place them seamlessly. Built with React Native for a smooth cross-platform experience and integrated with a backend API for real-time order management. The app features user authentication, cart management, and an intuitive UI for easy navigation.',
-                    skills: ['React Native', 'Node.js', 'Express', 'MySQL', 'Tailwind CSS'],
-                    liveUrl: 'https://play.google.com/store/apps/details?id=com.m_v_s_k.Ice_Cream',
-                    githubUrl: 'https://github.com/Venkata-Siva-Kumar/IceCream.git',
-                },
-                {
-                    title: 'Rock Paper Scissors Game',
-                    description: 'An interactive web-based Rock Paper Scissors game built with React. It features smooth UI design, dynamic game logic, and responsive styling using Tailwind CSS. The game allows users to play against the computer with real-time score updates and engaging visuals.',
-                    skills: ['React', 'JavaScript', 'Tailwind CSS'],
-                    liveUrl: 'https://venkata-siva-kumar.github.io/Rock-Paper-Scissor/',
-                    githubUrl: 'https://github.com/venkata-siva-kumar/Rock-Paper-Scissor',
+            // 1. Navbar Scroll Style & Active Scroll Spy
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            const handleScroll = () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-slate-100', 'shadow-sm');
+                } else {
+                    navbar.classList.remove('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-slate-100', 'shadow-sm');
                 }
-            ];
 
-            const skills = {
-                'Programming Languages': ['JavaScript', 'Python', 'Java', 'C++'],
-                'Front-end Development': ['React', 'React Native', 'HTML5', 'CSS3', 'Tailwind CSS'],
-                'Back-end Development': ['Node.js', 'Express','REST APIs'],
-                'Databases': ['MongoDB', 'MySQL'],
-                'Tools & Platforms': ['Git', 'GitHub', 'VS Code','Render','AivenF'],
+                // Scroll spy
+                let currentSection = 'home';
+                sections.forEach(sec => {
+                    const top = sec.offsetTop;
+                    const height = sec.offsetHeight;
+                    if (window.scrollY + 180 >= top) {
+                        currentSection = sec.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('text-accentBlue', 'font-bold');
+                    link.classList.add('text-slate-500');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('text-accentBlue', 'font-bold');
+                        link.classList.remove('text-slate-500');
+                    }
+                });
             };
 
-            const socials = [
-                { name: 'LinkedIn', url: 'https://www.linkedin.com/in/venkata-siva-kumar-236102310' },
-                { name: 'GitHub', url: 'https://github.com/Venkata-Siva-Kumar' },
-                { name: 'Twitter', url: 'https://x.com/SivaMariyala' },
-                { name: 'Email', url: 'mailto:mariyalasivakumar@gmail.com' },
-            ];
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Run initially
 
-            // Load and display the profile image
-            const profileImageContainer = document.getElementById('profile-image-container');
-            const fileId = "image_81b199.jpg-ec76e383-928b-4eae-8231-0dc0f4e12323";
-            const imageUrl = `https://storage.googleapis.com/cloud-artifact-content-storage-prod-public/${fileId}`;
+            // 2. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-            const imgElement = document.createElement('img');
-            imgElement.src = './siva.jpg';
-            imgElement.alt = "Profile";
-            imgElement.className = "rounded-full w-40 h-40 object-cover mx-auto ring-4 ring-purple-500";
-            profileImageContainer.appendChild(imgElement);
-
-            // Populate skills section
-            const skillsContainer = document.getElementById('skills-container');
-            for (const category in skills) {
-                const skillCategoryDiv = document.createElement('div');
-                skillCategoryDiv.className = 'bg-white rounded-xl shadow-md p-6';
-                skillCategoryDiv.innerHTML = `
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">${category}</h3>
-                    <div class="flex flex-wrap gap-2">
-                        ${skills[category].map(skill => `
-                            <span class="bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-full">
-                                ${skill}
-                            </span>
-                        `).join('')}
-                    </div>
-                `;
-                skillsContainer.appendChild(skillCategoryDiv);
-            }
-
-            // Populate projects section
-            const projectsContainer = document.getElementById('projects-container');
-            projects.forEach(project => {
-                const projectCard = document.createElement('div');
-                projectCard.className = 'bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden';
-                projectCard.innerHTML = `
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">${project.title}</h3>
-                        <p class="text-gray-600 mb-4">${project.description}</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            ${project.skills.map(skill => `
-                                <span class="bg-gray-200 text-gray-700 text-xs font-medium px-2.5 py-1 rounded-full">
-                                    ${skill}
-                                </span>
-                            `).join('')}
-                        </div>
-                        <div class="flex gap-4">
-                            <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300">Live Demo</a>
-                            <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="bg-gray-800 text-white font-medium py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300">GitHub</a>
-                        </div>
-                    </div>
-                `;
-                projectsContainer.appendChild(projectCard);
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const isOpened = !mobileMenu.classList.contains('hidden');
+                mobileMenuBtn.innerHTML = isOpened
+                    ? '<i class="fa-solid fa-xmark text-xl"></i>'
+                    : '<i class="fa-solid fa-bars text-xl"></i>';
             });
 
-            // Populate contact modal
-            const socialsContainer = document.getElementById('socials-container');
-            socials.forEach(social => {
-                const socialLink = document.createElement('a');
-                socialLink.href = social.url;
-                socialLink.target = '_blank';
-                socialLink.rel = 'noopener noreferrer';
-                socialLink.className = 'bg-blue-500 text-white font-medium py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors duration-300 transform hover:scale-105';
-                socialLink.textContent = social.name;
-                socialsContainer.appendChild(socialLink);
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+                });
             });
 
-            // Modal functionality
-            const contactModal = document.getElementById('contact-modal');
-            const contactButton = document.getElementById('contact-button');
-            const heroContactButton = document.getElementById('hero-contact-button');
-            const closeModalButton = document.getElementById('close-modal-button');
+            // 3. Typewriter Effect
+            const words = ["Software Developer", "React Native & App Specialist", "Conversational AI Architect", "Graph RAG Explorer"];
+            const typeText = document.getElementById('typewriter-text');
+            let index = 0;
+            let subIndex = 0;
+            let reverse = false;
 
-            const openModal = () => {
-                contactModal.classList.remove('hidden');
-                contactModal.classList.add('flex');
-            };
-
-            const closeModal = () => {
-                contactModal.classList.remove('flex');
-                contactModal.classList.add('hidden');
-            };
-
-            contactButton.addEventListener('click', openModal);
-            heroContactButton.addEventListener('click', openModal);
-            closeModalButton.addEventListener('click', closeModal);
-            contactModal.addEventListener('click', (e) => {
-                if (e.target === contactModal) {
-                    closeModal();
+            const typewriter = () => {
+                const currentWord = words[index];
+                if (!reverse) {
+                    typeText.textContent = currentWord.substring(0, subIndex + 1);
+                    subIndex++;
+                    if (subIndex === currentWord.length) {
+                        reverse = true;
+                        setTimeout(typewriter, 2000); // Wait on complete word
+                    } else {
+                        setTimeout(typewriter, 80);
+                    }
+                } else {
+                    typeText.textContent = currentWord.substring(0, subIndex - 1);
+                    subIndex--;
+                    if (subIndex === 0) {
+                        reverse = false;
+                        index = (index + 1) % words.length;
+                        setTimeout(typewriter, 400); // Pause before next word
+                    } else {
+                        setTimeout(typewriter, 40);
+                    }
                 }
-            });
+            };
+            setTimeout(typewriter, 500);
 
-            // Smooth scrolling for nav links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
+            // 4. Experience timeline bullet highlighting on tag hover
+            const expTags = document.querySelectorAll('.experience-tag');
+            const expBullets = document.querySelectorAll('.experience-bullet');
+
+            expTags.forEach(tag => {
+                tag.addEventListener('mouseenter', () => {
+                    const bulletIndex = parseInt(tag.getAttribute('data-bullet'));
+                    expBullets.forEach((bullet, idx) => {
+                        if (idx === bulletIndex) {
+                            bullet.classList.remove('opacity-20', 'scale-[0.98]');
+                            bullet.classList.add('opacity-100', 'scale-100', 'text-accentBlue');
+                        } else {
+                            bullet.classList.add('opacity-20', 'scale-[0.98]');
+                            bullet.classList.remove('opacity-100', 'scale-100', 'text-accentBlue');
+                        }
+                    });
+                });
+
+                tag.addEventListener('mouseleave', () => {
+                    expBullets.forEach(bullet => {
+                        bullet.classList.remove('opacity-20', 'scale-[0.98]', 'text-accentBlue');
+                        bullet.classList.add('opacity-100', 'scale-100');
                     });
                 });
             });
+
+            // 5. Projects filter
+            const filterBtns = document.querySelectorAll('.project-filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.getAttribute('data-filter');
+
+                    // Update active button state
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-darkSlate', 'text-white', 'shadow-md');
+                        b.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-500');
+                    });
+                    btn.classList.add('bg-darkSlate', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-500');
+
+                    // Filter cards
+                    projectCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (filter === 'all' || cardCategory === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // 6. Education & Certifications tab toggle
+            const tabEduBtn = document.getElementById('tab-edu-btn');
+            const tabCertBtn = document.getElementById('tab-cert-btn');
+            const eduContainer = document.getElementById('education-container');
+            const certsContainer = document.getElementById('certifications-container');
+
+            const switchTabs = (showEdu) => {
+                if (showEdu) {
+                    tabEduBtn.className = "flex items-center gap-2 px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-bold transition-all duration-200 bg-darkSlate text-white shadow-md";
+                    tabCertBtn.className = "flex items-center gap-2 px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-bold transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:text-darkSlate";
+                    eduContainer.classList.remove('hidden');
+                    certsContainer.classList.add('hidden');
+                } else {
+                    tabCertBtn.className = "flex items-center gap-2 px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-bold transition-all duration-200 bg-darkSlate text-white shadow-md";
+                    tabEduBtn.className = "flex items-center gap-2 px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-bold transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:text-darkSlate";
+                    certsContainer.classList.remove('hidden');
+                    eduContainer.classList.add('hidden');
+                }
+            };
+
+            tabEduBtn.addEventListener('click', () => switchTabs(true));
+            tabCertBtn.addEventListener('click', () => switchTabs(false));
+
         });
     </script>
 </body>
+
 </html>
